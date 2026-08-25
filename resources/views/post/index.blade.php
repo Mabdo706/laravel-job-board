@@ -6,7 +6,7 @@
         <p>{{ $post->body }}</p>
         <ul>
             @foreach ($post->comments as $comment)
-                <li>{{ $comment->contet }}{{ $comment->author }}</li>
+                <li>{{ $comment->content }}{{ $comment->author }}</li>
             @endforeach
         </ul>
     @endforeach

@@ -2,47 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\Tag;
+
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    function index()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-       $data = Tag::all();
+        $tags = Tag::paginate(10);
 
-       return view('tag.index',['tags' => $data,"pageTitle" => "Tags"]);
+       return view('tag.index',['tags' => $tags,"pageTitle" => "Tags"]);
     }
 
-    function create()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        Tag::create([
-             'title' => 'Author: Mohamed Abdo',
-        ]);
-
-        return redirect('/tags');
+        return view('tag.create', ["pageTitle" => "Create New Tag"]);
     }
 
-    function testManyToMany()
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
-        // $post9 = Post::find(9);
-        // $post10 = Post::find(10);
+        // @TODO: this will be completed in the forms section
+    }
 
-        // $post9->tags()->attach([1, 2]);
-        // $post10->tags()->attach([1]);
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $tags = Tag::findorfail($id);
 
-        // return response()->json(([
-        //     'post9' => $post9->tags,
-        //     'post10' =>$post10->tags
+        return view('tag.show',['tag' => $tags,'pageTitle' => 'View Tag']);
+    }
 
-        $tag = Tag::find(1);
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $tags = Tag::findorfail($id);
 
-        $tag->posts()->attach([2]);
+        return view('tag.edit', ['tag' => $tags, "pageTitle" => "Edit Tag"]);
+    }
 
-        return response()->json([
-            'tag' => $tag->title,
-            'posts' => $tag->posts
-        ]);
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        // @TODO: this will be completed in the forms section
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        // @TODO: this will be completed in the forms section
     }
 }

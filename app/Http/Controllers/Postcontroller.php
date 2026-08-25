@@ -5,37 +5,67 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-class Postcontroller extends Controller
+class PostController extends Controller
 {
-    function index()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-       $data = Post::paginate(10);
+        $data = Post::paginate(10);
 
        return view('post.index',['posts' => $data,"pageTitle" => "Blog"]);
     }
 
-    function show($id)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('post.create', ["pageTitle" => "Create New Post"]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        // @TODO: this will be completed in the forms section
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
         $post = Post::findorfail($id);
 
         return view('post.show',['post' => $post,"pageTitle" => $post->title]);
     }
 
-    function create()
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
-        Post::create([
-             'title' => 'My find uniqe post',
-             'body' => 'This is to test find',
-             'published' => true
-        ]);
+        $post = Post::findorfail($id);
 
-        Post::factory(100)->create();
-
-        return redirect('/blog');
+        return view('post.edit', ["pageTitle" => "Blog - Edit New Post"]);
     }
 
-    function delete()
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
-        Post::destroy('9da6a415-0002-4789-9cbc-0aabe77b44f2');
+        // @TODO: this will be completed in the forms section
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        // @TODO: this will be completed in the forms section
     }
 }
