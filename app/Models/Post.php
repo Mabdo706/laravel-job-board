@@ -20,7 +20,7 @@ class Post extends Model
 
     protected $table = 'post';
 
-    protected $fillable = ['title','body','published']; // fields that can be updated
+    protected $fillable = ['title','author','content','published']; // fields that can be updated
 
     protected $guarded = ['id']; // cannot be updated/assigned (read only)
 

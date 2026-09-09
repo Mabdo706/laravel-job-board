@@ -1,27 +1,45 @@
 <?php
 
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\commentcontroller;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
-use App\Http\Controllers\Postcontroller;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
+
+// Route::get('/about', function () {
+//     return view('about');
+// });
+
+// Route::get('/contact', function () {
+//     return view('contact');
+// });
+
+// Route::get('/blog', function () {
+//     return view('blog');
+// });
+// Route::get('/blog/create', [PostController::class, 'create']);
+// Route::post('/blog', [PostController::class, 'store']);
+
 
 Route::get('/', IndexController::class);
 Route::get('/about', AboutController::class);
 Route::get('/contact', ContactController::class);
 
 
-Route::get(uri: '/job', action: [JobController::class, 'index']);
+Route::get('/job', [JobController::class, 'index']);
 
 Route::resource('blog', PostController::class);
 Route::resource('comments', CommentController::class);
 Route::resource('tags', TagController::class);
+
+
+
 
 
