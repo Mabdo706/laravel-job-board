@@ -45,7 +45,27 @@
                         </a>
                     </div>
                 </div>
+                <div>
+                    @auth
+                    <span class="text-white mr-4">{{ Auth::user()->name }}</span>
+                    <form method="POST" action="/logout">
+                        @csrf
+                        <button type="submit" class="bg-gray-800 text-gray-400 hover:text-white">
+                            Logout
+                        </button>
 
+                    </form>
+                    @else
+                        <a href="/signup" class="{{ request()->is('signup') ? 'text-white font-semibold border-b-2 border-blue-500 pb-1' : 'text-gray-300 hover:text-white transition-colors' }}">
+                            Signup
+                        </a>
+        
+                        <a href="/login" class="{{ request()->is('login') ? 'text-white font-semibold border-b-2 border-blue-500 pb-1' : 'text-gray-300 hover:text-white transition-colors' }}">
+                            Login
+                        </a>
+                    @endauth
+                </div>
+                
             </div>
         </div>
     </nav>
