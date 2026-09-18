@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BlogPostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -33,9 +34,9 @@ class PostController extends Controller
     {
         $post = new Post();
         $post->title = $request->input('title');
-        $post->author = $request->input('author');
         $post->content = $request->input('content');
         $post->published = $request->has('published');
+        $post->user_id = auth()->id();
 
         $post->save();
 
@@ -45,34 +46,25 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        // تعديل findorfail إلى findOrFail
-        $post = Post::findOrFail($id);
-
         return view('post.show', ['post' => $post, "pageTitle" => $post->title]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Post $post)
     {
-        $post = Post::findOrFail($id);
-
         return view('post.edit', ["post" => $post, "pageTitle" => "Blog - Edit Post" . $post->title]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(BlogPostRequest $request, string $id)
+    public function update(BlogPostRequest $request, Post $post)
     {
-
-        $post = Post::findOrFail($id);
-
         $post->title = $request->input('title');
-        $post->author = $request->input('author');
         $post->content = $request->input('content');
         $post->published = $request->has('published');
 
@@ -84,9 +76,8 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
         $post->delete();
 
         return redirect('/blog')->with('success', 'Post deleted successfully!');

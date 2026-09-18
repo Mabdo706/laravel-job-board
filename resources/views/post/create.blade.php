@@ -11,7 +11,7 @@
                 <div class="mt-8 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                     <!-- Title -->
-                    <div class="sm:col-span-3">
+                    <div class="col-span-full">
                         <label for="title" class="block text-sm/6 font-medium text-gray-900">
                             Title
                         </label>
@@ -29,29 +29,7 @@
                         <span class="text-red-600">{{ $message }}</span>
                         @enderror
                     </div>
-                    
 
-                    <!-- author -->
-                    <div class="sm:col-span-3">
-                        <label for="author" class="block text-sm/6 font-medium text-gray-900">
-                            author
-                        </label>
-
-                        <div class="mt-2">
-                            <input
-                                id="author"
-                                type="text"
-                                name="author"
-                                value="{{ old('author') }}"
-                                autocomplete="family-name"
-                                class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 {{ $errors->has('author') ? 'outline-red-500 focus:outline-red-600' : 'outline-gray-300 focus:outline-indigo-600' }} sm:text-sm/6"
-                            />
-                        </div>
-                        @error('author')
-                        <span class="mt-4 text-red-600 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    
 
                     <!-- Content -->
                     <div class="col-span-full">

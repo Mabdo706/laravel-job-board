@@ -20,9 +20,14 @@ class Post extends Model
 
     protected $table = 'post';
 
-    protected $fillable = ['title','author','content','published']; // fields that can be updated
+    protected $fillable = ['title','author','content','published', 'user_id']; // fields that can be updated
 
     protected $guarded = ['id']; // cannot be updated/assigned (read only)
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function comments()
     {
